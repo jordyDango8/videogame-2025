@@ -35,7 +35,11 @@ public class PlayerBehaviour : MonoBehaviour
 
     void Move()
     {
-        myRb.velocity = new Vector2(movementSpeed * Time.deltaTime, myRb.velocity.y);
+        //myRb.velocity = new Vector2(movementSpeed * Time.deltaTime, myRb.velocity.y);
+        //Debug.Log("mySpeed= " + movementSpeed * Time.deltaTime);
+        
+        myRb.velocity = new Vector2(movementSpeed, myRb.velocity.y);
+        Debug.Log("mySpeed= " + movementSpeed);
     }
 
     public void Jump()
