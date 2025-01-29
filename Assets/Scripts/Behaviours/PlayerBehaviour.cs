@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class PlayerBehaviour : MonoBehaviour
 {
     [SerializeField]
-    GameManager gameManager;
+    LivesController livesController;
 
     Rigidbody2D myRb;
 
@@ -25,7 +25,7 @@ public class PlayerBehaviour : MonoBehaviour
 
     void Start()
     {
-        
+
     }
 
     void Update()
@@ -37,9 +37,9 @@ public class PlayerBehaviour : MonoBehaviour
     {
         //myRb.velocity = new Vector2(movementSpeed * Time.deltaTime, myRb.velocity.y);
         //Debug.Log("mySpeed= " + movementSpeed * Time.deltaTime);
-        
+
         myRb.velocity = new Vector2(movementSpeed, myRb.velocity.y);
-        Debug.Log("mySpeed= " + movementSpeed);
+        //Debug.Log("mySpeed= " + movementSpeed);
     }
 
     public void Jump()
@@ -50,9 +50,9 @@ public class PlayerBehaviour : MonoBehaviour
     void TakeDamage()
     {
         Debug.Log("take damage");
-        lives -= 1;
-        gameManager.UpdateLives(lives);
-        if(lives <= 0)
+
+        livesController.TakeDamage();
+        if (lives <= 0)
         {
             lives = 0;
             Die();
