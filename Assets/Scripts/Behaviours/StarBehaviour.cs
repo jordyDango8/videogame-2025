@@ -6,8 +6,7 @@ public class StarBehaviour : MonoBehaviour
 {
     SpriteRenderer mySpriteRenderer;
 
-    [SerializeField]
-    Transform target;
+    Transform player;
 
     void Start()
     {
@@ -22,7 +21,7 @@ public class StarBehaviour : MonoBehaviour
     internal void Appear()
     {
         EnDisSpriteRenderer(true);
-        ChangePosition(target.position); // in player's position
+        //ChangePosition(player.position); // in player's position
     }
 
     void EnDisSpriteRenderer(bool _newState)
@@ -30,7 +29,7 @@ public class StarBehaviour : MonoBehaviour
         mySpriteRenderer.enabled = _newState;
     }
 
-    void ChangePosition(Vector3 _newPosition)
+    internal void ChangePosition(Vector3 _newPosition)
     {
         transform.position = _newPosition;
     }
