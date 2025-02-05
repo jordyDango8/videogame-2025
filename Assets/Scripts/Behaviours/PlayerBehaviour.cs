@@ -52,6 +52,7 @@ public class PlayerBehaviour : MonoBehaviour
         Debug.Log("take damage");
 
         livesController.TakeDamage();
+        lives -= 1;
         if (lives <= 0)
         {
             lives = 0;
@@ -61,7 +62,7 @@ public class PlayerBehaviour : MonoBehaviour
 
     void Die()
     {
-        Debug.Log("die");
+        //Debug.Log("die");
         EventsManager.CallOnGameOver(false);
     }
 }

@@ -10,11 +10,11 @@ public class GameplaySceneController : MonoBehaviour
     {
         if (_hasWin)
         {
-            Debug.Log("win");
+            //Debug.Log("win");
         }
         else
         {
-            Debug.Log("lose");
+            //Debug.Log("lose");
         }
         SceneManager.LoadScene(0);
     }

@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StarsController : MonoBehaviour
+public class PlanetsController : MonoBehaviour
 {
     // the stars must appear at begin
     // the stars must desappear when leave from left
     // the stars must appear constantly in the rigth side of the player
     [SerializeField]
-    StarBehaviour[] stars;
+    PlanetBehaviour[] stars;
 
     [SerializeField]
     Transform player;

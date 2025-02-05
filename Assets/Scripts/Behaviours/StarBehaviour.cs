@@ -6,7 +6,8 @@ public class StarBehaviour : MonoBehaviour
 {
     SpriteRenderer mySpriteRenderer;
 
-    Transform player;
+    [SerializeReference]
+    ParticleSystem pickUpPS;
 
     void Start()
     {
@@ -18,25 +19,26 @@ public class StarBehaviour : MonoBehaviour
 
     }
 
-    internal void Appear()
+    void OnTriggerEnter2D(Collider2D other)
     {
-        EnDisSpriteRenderer(true);
-        //ChangePosition(player.position); // in player's position
+        //Debug.Log("collided with: " + other.name);
+        if (other.CompareTag(EnumManager.Tags.Player.ToString()))
+        {
+            BeCollected();
+        }
     }
 
-    void EnDisSpriteRenderer(bool _newState)
+    void BeCollected()
     {
-        mySpriteRenderer.enabled = _newState;
-    }
-
-    internal void ChangePosition(Vector3 _newPosition)
-    {
-        transform.position = _newPosition;
+        //Debug.Log("be collected");
+        mySpriteRenderer.enabled = false;
+        pickUpPS.Play();
     }
 
     void OnEnable()
     {
-        //Debug.Log("onEnable");
         mySpriteRenderer = GetComponent<SpriteRenderer>();
+        var pickUpMain = pickUpPS.main;
+        pickUpMain.loop = false;
     }
 }
