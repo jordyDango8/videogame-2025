@@ -62,6 +62,6 @@ public class PlayerBehaviour : MonoBehaviour
     void Die()
     {
         Debug.Log("die");
-        SceneManager.LoadScene(0);
+        EventsManager.CallOnGameOver(false);
     }
 }

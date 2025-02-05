@@ -10,7 +10,7 @@ public class StarBehaviour : MonoBehaviour
 
     void Start()
     {
-        mySpriteRenderer = GetComponent<SpriteRenderer>();
+
     }
 
     void Update()
@@ -32,5 +32,11 @@ public class StarBehaviour : MonoBehaviour
     internal void ChangePosition(Vector3 _newPosition)
     {
         transform.position = _newPosition;
+    }
+
+    void OnEnable()
+    {
+        //Debug.Log("onEnable");
+        mySpriteRenderer = GetComponent<SpriteRenderer>();
     }
 }
