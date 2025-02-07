@@ -18,7 +18,7 @@ public class ParallaxHelper : MonoBehaviour
     }
 
 
-    void Update()
+    void FixedUpdate()
     {
         Move();
     }

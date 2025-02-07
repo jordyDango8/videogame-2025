@@ -8,20 +8,18 @@ public class PlanetBehaviour : MonoBehaviour
 
     Transform player;
 
-    void Start()
-    {
 
-    }
-
-    void Update()
-    {
-
-    }
 
     internal void Appear()
     {
         EnDisSpriteRenderer(true);
         //ChangePosition(player.position); // in player's position
+    }
+
+    internal void Dissapear()
+    {
+        //Debug.Log($"{gameObject.name} dissapeared");
+        EnDisSpriteRenderer(false);
     }
 
     void EnDisSpriteRenderer(bool _newState)
@@ -33,6 +31,13 @@ public class PlanetBehaviour : MonoBehaviour
     {
         transform.position = _newPosition;
     }
+
+    #region Getters&Setters
+    internal bool GetState()
+    {
+        return mySpriteRenderer.enabled;
+    }
+    #endregion
 
     void OnEnable()
     {

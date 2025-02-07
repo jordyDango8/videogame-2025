@@ -17,7 +17,10 @@ public class BackgroundDeadZoneHelper : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("collided with: " + other.name);
-        other.SendMessage("Die");
+        //Debug.Log("collided with: " + other.name);
+        if (other.CompareTag(EnumManager.Tags.Planet.ToString()))
+        {
+            other.GetComponent<PlanetBehaviour>().Dissapear();
+        }
     }
 }

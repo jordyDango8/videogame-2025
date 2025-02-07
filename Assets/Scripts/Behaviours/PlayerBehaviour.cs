@@ -18,6 +18,21 @@ public class PlayerBehaviour : MonoBehaviour
 
     int lives = 3;
 
+    float gravityScale = 1.5f;
+
+    bool isGrounded = false;
+
+    [SerializeField]
+    Transform groundedRayOrigin;
+
+    [SerializeField]
+
+    LayerMask groundedRayLayerMask;
+
+    float groundedRayDistance = 0.5f;
+
+    Vector3 groundedRayDirection = Vector3.down;
+
     void Awake()
     {
         myRb = GetComponent<Rigidbody2D>();
@@ -25,12 +40,14 @@ public class PlayerBehaviour : MonoBehaviour
 
     void Start()
     {
-
+        myRb.gravityScale = gravityScale;
+        //myRb.gravityScale = 0; // for test
     }
 
     void Update()
     {
         Move();
+        CheckGrounded();
     }
 
     void Move()
@@ -42,12 +59,42 @@ public class PlayerBehaviour : MonoBehaviour
         //Debug.Log("mySpeed= " + movementSpeed);
     }
 
+    void CheckGrounded()
+    {
+        RaycastHit hit;
+        Debug.DrawRay(groundedRayOrigin.position, groundedRayDirection * groundedRayDistance, Color.blue);
+        // Does the ray intersect any objects excluding the player layer
+        if (Physics.Raycast
+        (
+            groundedRayOrigin.position,
+            groundedRayDirection,
+            out hit,
+            Mathf.Infinity,
+            groundedRayLayerMask
+        ))
+        {
+            Debug.DrawRay(groundedRayOrigin.position, groundedRayDirection * groundedRayDistance, Color.red);
+            Debug.Log("Did Hit");
+            isGrounded = true;
+        }
+        else
+        {
+            Debug.DrawRay(groundedRayOrigin.position, groundedRayDirection * groundedRayDistance, Color.green);
+            Debug.Log("Did not Hit");
+            isGrounded = false;
+        }
+    }
+
     public void Jump()
     {
+        if (!isGrounded)
+        {
+            return;
+        }
         myRb.AddForce(Vector2.up * jumpForce);
     }
 
-    void TakeDamage()
+    internal void TakeDamage()
     {
         Debug.Log("take damage");
 

@@ -8,8 +8,9 @@ public class GoalBehaviour : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("collided with: " + other.name);
+        //Debug.Log("collided with: " + other.name);
         //if (EventsManager.onGameOver != null)
+        if (other.CompareTag(EnumManager.Tags.Player.ToString()))
         {
             //EventsManager.onGameOver(true); check and solve this error
             EventsManager.CallOnGameOver(true);
