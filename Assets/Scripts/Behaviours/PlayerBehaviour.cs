@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -61,17 +62,15 @@ public class PlayerBehaviour : MonoBehaviour
 
     void CheckGrounded()
     {
-        RaycastHit hit;
         Debug.DrawRay(groundedRayOrigin.position, groundedRayDirection * groundedRayDistance, Color.blue);
-        // Does the ray intersect any objects excluding the player layer
-        if (Physics.Raycast
+        RaycastHit2D hit = Physics2D.Raycast
         (
-            groundedRayOrigin.position,
+            transform.position,
             groundedRayDirection,
-            out hit,
-            Mathf.Infinity,
+            groundedRayDistance,
             groundedRayLayerMask
-        ))
+        );
+        if (hit)
         {
             Debug.DrawRay(groundedRayOrigin.position, groundedRayDirection * groundedRayDistance, Color.red);
             Debug.Log("Did Hit");

@@ -6,7 +6,7 @@ public class StarBehaviour : MonoBehaviour
 {
     SpriteRenderer mySpriteRenderer;
 
-    [SerializeReference]
+    [SerializeField]
     ParticleSystem pickUpPS;
 
     void Start()
@@ -33,6 +33,8 @@ public class StarBehaviour : MonoBehaviour
         //Debug.Log("be collected");
         mySpriteRenderer.enabled = false;
         pickUpPS.Play();
+        FindObjectOfType<PlayerData>().SetStars(FindObjectOfType<PlayerData>().GetStars() + 1);
+        FindObjectOfType<ProgressSliderHelper>().UpdateSlider();
     }
 
     void OnEnable()
