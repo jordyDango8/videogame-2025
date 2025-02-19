@@ -8,7 +8,7 @@ public class BackgroundDeadZoneHelper : MonoBehaviour
     Transform target;
 
     [SerializeField]
-    float offsetX = 16;
+    float offsetX = 20;
 
     void Update()
     {
@@ -21,6 +21,10 @@ public class BackgroundDeadZoneHelper : MonoBehaviour
         if (other.CompareTag(EnumManager.Tags.Planet.ToString()))
         {
             other.GetComponent<PlanetBehaviour>().Dissapear();
+        }
+        if (other.CompareTag(EnumManager.Tags.Cloud.ToString()))
+        {
+            other.GetComponent<CloudBehaviour>().Dissapear();
         }
     }
 }

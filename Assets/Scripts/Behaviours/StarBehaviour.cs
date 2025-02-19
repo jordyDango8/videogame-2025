@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class StarBehaviour : MonoBehaviour
 {
+    AudioManager audioManager;
     SpriteRenderer mySpriteRenderer;
 
     [SerializeField]
@@ -11,7 +12,7 @@ public class StarBehaviour : MonoBehaviour
 
     void Start()
     {
-
+        audioManager = AudioManager.audioManager;
     }
 
     void Update()
@@ -31,6 +32,7 @@ public class StarBehaviour : MonoBehaviour
     void BeCollected()
     {
         //Debug.Log("be collected");
+        audioManager.Play(EnumManager.Audio.starCollect);
         mySpriteRenderer.enabled = false;
         pickUpPS.Play();
         FindObjectOfType<PlayerData>().SetStars(FindObjectOfType<PlayerData>().GetStars() + 1);
@@ -39,6 +41,7 @@ public class StarBehaviour : MonoBehaviour
 
     void OnEnable()
     {
+
         mySpriteRenderer = GetComponent<SpriteRenderer>();
         var pickUpMain = pickUpPS.main;
         pickUpMain.loop = false;

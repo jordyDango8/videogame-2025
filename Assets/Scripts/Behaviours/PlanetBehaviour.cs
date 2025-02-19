@@ -8,8 +8,6 @@ public class PlanetBehaviour : MonoBehaviour
 
     Transform player;
 
-
-
     internal void Appear()
     {
         EnDisSpriteRenderer(true);

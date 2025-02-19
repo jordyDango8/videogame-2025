@@ -6,7 +6,7 @@ public class ParallaxHelper : MonoBehaviour
 {
     Vector3 startPos;
 
-    float maxSpeed = 11; //min layer + 1
+    float maxSpeed = 5;
 
     float myParallaxSpeed = 0;
 
@@ -16,7 +16,6 @@ public class ParallaxHelper : MonoBehaviour
         myParallaxSpeed = maxSpeed + GetComponent<SpriteRenderer>().sortingOrder;
         //Debug.Log("I'm " + gameObject.name + " " + "my parallax speed is " + myParallaxSpeed);
     }
-
 
     void FixedUpdate()
     {
@@ -31,4 +30,5 @@ public class ParallaxHelper : MonoBehaviour
         // layer -3     1 = max + layer        
         transform.position -= new Vector3(myParallaxSpeed / 100f, 0, 0);
     }
+
 }

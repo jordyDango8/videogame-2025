@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class PlayerBehaviour : MonoBehaviour
 {
+    AudioManager audioManager;
+
     [SerializeField]
     LivesController livesController;
 
@@ -34,15 +36,15 @@ public class PlayerBehaviour : MonoBehaviour
 
     Vector3 groundedRayDirection = Vector3.down;
 
-    void Awake()
-    {
-        myRb = GetComponent<Rigidbody2D>();
-    }
+    bool immortal = false;
+
+    Animator myAnimator;
 
     void Start()
     {
         myRb.gravityScale = gravityScale;
         //myRb.gravityScale = 0; // for test
+        //immortal = true; // for test
     }
 
     void Update()
@@ -73,13 +75,13 @@ public class PlayerBehaviour : MonoBehaviour
         if (hit)
         {
             Debug.DrawRay(groundedRayOrigin.position, groundedRayDirection * groundedRayDistance, Color.red);
-            Debug.Log("Did Hit");
+            //Debug.Log("Did Hit");
             isGrounded = true;
         }
         else
         {
             Debug.DrawRay(groundedRayOrigin.position, groundedRayDirection * groundedRayDistance, Color.green);
-            Debug.Log("Did not Hit");
+            //Debug.Log("Did not Hit");
             isGrounded = false;
         }
     }
@@ -90,12 +92,20 @@ public class PlayerBehaviour : MonoBehaviour
         {
             return;
         }
+        audioManager.Play(EnumManager.Audio.playerJump);
         myRb.AddForce(Vector2.up * jumpForce);
     }
 
     internal void TakeDamage()
     {
+        if (immortal)
+        {
+            return;
+        }
         Debug.Log("take damage");
+        audioManager.Play(EnumManager.Audio.unstitch);
+
+        myAnimator.Play("foxTakeDamage");
 
         livesController.TakeDamage();
         lives -= 1;
@@ -111,4 +121,12 @@ public class PlayerBehaviour : MonoBehaviour
         //Debug.Log("die");
         EventsManager.CallOnGameOver(false);
     }
+
+    void OnEnable()
+    {
+        audioManager = AudioManager.audioManager;
+        myRb = GetComponent<Rigidbody2D>();
+        myAnimator = GetComponent<Animator>();
+    }
+
 }
