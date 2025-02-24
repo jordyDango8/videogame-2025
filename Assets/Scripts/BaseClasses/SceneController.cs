@@ -24,7 +24,7 @@ public class SceneController : MonoBehaviour
 
     void Start()
     {
-        audioManager.Play(EnumManager.Audio.level1);
+        audioManager.Play(EnumManager.Audio.level1EndlessRunner);
         waitToChangeScene = 0f; // ForTesting
     }
 

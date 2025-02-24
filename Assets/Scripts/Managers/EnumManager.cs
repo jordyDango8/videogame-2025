@@ -9,7 +9,7 @@ public class EnumManager
 
     internal enum Audio
     {
-        level1,
+        level1EndlessRunner,
         playerJump,
         starCollect,
         unstitch,
@@ -31,5 +31,11 @@ public class EnumManager
         Fox,
         OrangeCat,
         WhiteCat,
+    }
+
+    internal enum Animations
+    {
+        orangeCatBeRescued,
+        whiteCatBeRescued,
     }
 }

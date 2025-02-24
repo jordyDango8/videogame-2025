@@ -52,7 +52,10 @@ public class AudioManager : MonoBehaviour
     {
         //Debug.Log($"play {_nameEnum}");
         AudioSource soundTemp = Search(_nameEnum).source;  //marca error y se detiene, ver por qué
-        soundTemp.Play();
+        if (soundTemp != null)
+        {
+            soundTemp.Play();
+        }
     }
 
     internal void Stop(EnumManager.Audio _nameEnum)

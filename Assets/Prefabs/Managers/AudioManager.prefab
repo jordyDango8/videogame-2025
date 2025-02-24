@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sounds:
-  - clip: {fileID: 8300000, guid: 33cebb93ed1f85341b879c620c71ebc8, type: 3}
+  - clip: {fileID: 8300000, guid: 86b0a63aeb2604543b0dd671ea082794, type: 3}
     playOnAwake: 1
     loop: 1
     volume: 0.5

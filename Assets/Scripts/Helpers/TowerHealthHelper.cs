@@ -8,8 +8,6 @@ public class TowerHealthHelper : MonoBehaviour
     [SerializeField]
     SpriteRenderer damageShadowBar;
 
-
-    float minHealth = 0;
     [SerializeField]
     float currentHealth;
     float maxHealth = 100;
