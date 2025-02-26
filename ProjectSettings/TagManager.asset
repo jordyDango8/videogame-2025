@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Planet
   - Cloud
+  - Boss
+  - Tower
+  - AllyMinion
+  - EnemyMinion
   layers:
   - Default
   - TransparentFX

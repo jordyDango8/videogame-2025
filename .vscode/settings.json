@@ -57,5 +57,5 @@
         "Temp/": true
     },
     "dotnet.defaultSolution": "videogame-2025.sln",
-    "CodeGPT.apiKey": "CodeGPT Plus Beta"
+    "CodeGPT.apiKey": "Ollama"
 }

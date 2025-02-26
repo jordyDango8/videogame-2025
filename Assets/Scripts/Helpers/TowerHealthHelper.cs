@@ -9,15 +9,13 @@ public class TowerHealthHelper : MonoBehaviour
     SpriteRenderer damageShadowBar;
 
     [SerializeField]
-    float currentHealth;
-    float maxHealth = 100;
+    TowerBehaviour towerBehaviour;
 
     float damageShadowBarMinHeight = 0.0f;
     float damageShadowBarMaxHeight = 16.5f;
 
     void Start()
     {
-        currentHealth = maxHealth;
 
         // shadow size must start at 0
         damageShadowBar.size = new Vector2(damageShadowBar.size.x, 0);
@@ -30,8 +28,8 @@ public class TowerHealthHelper : MonoBehaviour
 
     void UpdateDamegeShadowBar()
     {
-        float curentDamage = (maxHealth - currentHealth);
-        float healthPercentage = curentDamage / maxHealth; // to make it from 0 to 1
+        float curentDamage = (towerBehaviour.GetMaxHealth() - towerBehaviour.GetCurrentHealth());
+        float healthPercentage = curentDamage / towerBehaviour.GetMaxHealth(); // to make it from 0 to 1
         float newHeight = Mathf.Lerp(damageShadowBarMinHeight, damageShadowBarMaxHeight, healthPercentage);
         damageShadowBar.size = new Vector2(damageShadowBar.size.x, newHeight);
     }

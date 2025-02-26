@@ -1,10 +1,19 @@
-public class EnumManager
+using UnityEngine;
+using System;
+
+public class EnumManager : MonoBehaviour
 {
+    internal static EnumManager enumManager;
+
     internal enum Tags
     {
         Player,
         Planet,
-        Cloud
+        Cloud,
+        Boss,
+        Tower,
+        AllyMinion,
+        EnemyMinion,
     }
 
     internal enum Audio
@@ -38,4 +47,43 @@ public class EnumManager
         orangeCatBeRescued,
         whiteCatBeRescued,
     }
+
+    internal enum BossActions
+    {
+        move,
+        attack,
+    }
+
+    internal enum enemyMinionStates
+    {
+        orbiting,
+        attacking,
+    }
+
+    void Awake()
+    {
+        if (enumManager == null)
+        {
+            enumManager = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+        DontDestroyOnLoad(gameObject);
+    }
+
+    void Start()
+    {
+        //MyEnum randomEnumValue = GetRandomEnumValue<MyEnum>();
+        //Debug.Log("Valor aleatorio: " + randomEnumValue);
+    }
+
+    internal T GetRandomEnumValue<T>() where T : Enum
+    {
+        Array values = Enum.GetValues(typeof(T));
+        int randomIndex = UnityEngine.Random.Range(0, values.Length);
+        return (T)values.GetValue(randomIndex);
+    }
+
 }
