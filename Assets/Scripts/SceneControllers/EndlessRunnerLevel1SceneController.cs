@@ -9,6 +9,8 @@ public class EndlessRunnerSceneController : SceneController
 {
     protected override void Start()
     {
+        playerDataManager.EraseRescuedAnimals();
+
         myLevelAudio = EnumManager.Audio.level1EndlessRunner;
         myLoseAudio = EnumManager.Audio.loseEndless;
         myWinAudio = EnumManager.Audio.winEndless;

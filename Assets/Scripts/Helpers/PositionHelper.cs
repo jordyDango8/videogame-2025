@@ -5,19 +5,11 @@ using UnityEngine;
 
 public class positionHelper : MonoBehaviour
 {
-    //[SerializeField]
-    //TowerBehaviour target;
-
     [SerializeField]
-    Transform target;
+    TowerBehaviour towerBehaviour;
 
     void OnMouseDown()
     {
-        Debug.Log("$move to {transform.postion}");
-        while (target.position != transform.position)
-        {
-            //target
-            //target.position = Lerp(transform.position);
-        }
+        towerBehaviour.SetMovementTarget(transform.position);
     }
 }

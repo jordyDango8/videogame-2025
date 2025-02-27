@@ -44,10 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b588f552380da446900c9af70854e83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fox: {fileID: 21300000, guid: fbed4aed3195d934388c0cd98f1843af, type: 3}
+  fox: {fileID: 21300000, guid: 5732b0e94806f4e408c4d99e59da996a, type: 3}
   orangeCatNormal: {fileID: 21300000, guid: 5732b0e94806f4e408c4d99e59da996a, type: 3}
   orangeCatCorrupted: {fileID: 21300000, guid: 9aa57bd0b9249014eb9e90e4fd172b7f, type: 3}
   whiteCatNormal: {fileID: 21300000, guid: ae2d9474e20c5df4db65e58e6b7a8c6a, type: 3}
-  whiteCatCorrupted: {fileID: 21300000, guid: 88a2eae384a8cba4284cbc1b1acbbafb, type: 3}
+  whiteCatCorrupted: {fileID: 21300000, guid: 7411aa157f98df64ab0dac3666c4620f, type: 3}
   winScreen: {fileID: 21300000, guid: b64847e0a9ff99d4b941a150ca07f65d, type: 3}
   loseScreen: {fileID: 21300000, guid: c66350e158313114c933241f7b6f1538, type: 3}

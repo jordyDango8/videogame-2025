@@ -71,9 +71,9 @@ public class SceneController : MonoBehaviour
 
     protected void OnEnable()
     {
-        Debug.Log($"on enable {gameObject.name}");
+        //Debug.Log($"on enable {gameObject.name}");
         audioManager = AudioManager.audioManager;
-        Debug.Log($"AudioManager {audioManager} {gameObject.name}");
+        //Debug.Log($"AudioManager {audioManager} {gameObject.name}");
         spritesManager = SpritesManager.spritesManager;
         playerDataManager = PlayerDataManager.playerDataManager;
 

@@ -95,5 +95,10 @@ MonoBehaviour:
     loop: 0
     volume: 0.5
     pitch: 1
+  - clip: {fileID: 8300000, guid: 34257f3db4f9dbd46b1c91f952df2de3, type: 3}
+    playOnAwake: 0
+    loop: 0
+    volume: 0.5
+    pitch: 1
   audioMixerGroup: {fileID: 24300002, guid: 2af28eb7a9678f140b6f8b2be26aee88, type: 2}
   audioMixer: {fileID: 24100000, guid: 2af28eb7a9678f140b6f8b2be26aee88, type: 2}

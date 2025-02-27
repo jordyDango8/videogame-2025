@@ -29,6 +29,7 @@ public class EnumManager : MonoBehaviour
         loseEndless,
         winBossFight,
         winEndless,
+        rescue,
     }
 
     public enum floatType
@@ -59,12 +60,14 @@ public class EnumManager : MonoBehaviour
     {
         move,
         attack,
+        spawnMinions,
     }
 
     public enum enemyMinionStates
     {
         orbiting,
         attacking,
+        dead,
     }
 
     void Awake()

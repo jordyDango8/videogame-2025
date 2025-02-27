@@ -5,6 +5,16 @@ using UnityEngine;
 
 public class BossShadowhHelper : MonoBehaviour
 {
+    PlayerDataManager playerDataManager;
+
+    SpriteRenderer mySpriteRenderer;
+
+    [SerializeField]
+    Sprite orangeCatCorrupted;
+
+    [SerializeField]
+    Sprite whiteCatCorrupted;
+
     [SerializeField]
     SpriteRenderer damageShadowBar;
 
@@ -16,6 +26,8 @@ public class BossShadowhHelper : MonoBehaviour
 
     void Start()
     {
+        SetSprite();
+
         // shadow size must start at max
         damageShadowBar.size = new Vector2(damageShadowBar.size.x, damageShadowBarMaxHeight);
     }
@@ -35,5 +47,23 @@ public class BossShadowhHelper : MonoBehaviour
         float newHeight = Mathf.Lerp(damageShadowBarMinHeight, damageShadowBarMaxHeight, healthPercentage);
         damageShadowBar.size = new Vector2(damageShadowBar.size.x, newHeight);
         //print($"current health {bossBehaviour.GetCurrentHealth()}");
+    }
+
+    internal void SetSprite()
+    {
+        if (playerDataManager.GetRescuedAnimals()[0] == EnumManager.AnimalsNames.OrangeCat)
+        {
+            mySpriteRenderer.sprite = whiteCatCorrupted;
+        }
+        else
+        {
+            mySpriteRenderer.sprite = orangeCatCorrupted;
+        }
+    }
+
+    void OnEnable()
+    {
+        playerDataManager = PlayerDataManager.playerDataManager;
+        mySpriteRenderer = GetComponent<SpriteRenderer>();
     }
 }

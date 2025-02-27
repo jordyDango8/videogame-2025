@@ -12,7 +12,7 @@ public class PlayerPortalBehaviour : MonoBehaviour
 
     void OnMouseDown()
     {
-        Debug.Log("Clicked");
+        //Debug.Log("Clicked");
         SpawnAlly();
     }
 

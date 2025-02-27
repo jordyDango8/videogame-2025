@@ -25,7 +25,8 @@ public class PlayerDataManager : MonoBehaviour
 
     void Start()
     {
-        SetRescuedAnimals(EnumManager.AnimalsNames.OrangeCat); //for testing
+        //SetRescuedAnimals(EnumManager.AnimalsNames.OrangeCat); //for testing
+        //SetRescuedAnimals(EnumManager.AnimalsNames.WhiteCat); //for testing
     }
 
     internal int GetStars()
@@ -47,6 +48,11 @@ public class PlayerDataManager : MonoBehaviour
     {
         //Debug.Log($"rescued {_newAnimalName}");
         rescuedAnimals.Add(_newAnimalName);
+    }
+
+    internal void EraseRescuedAnimals()
+    {
+        rescuedAnimals.Clear();
     }
 
     void OnEnable()

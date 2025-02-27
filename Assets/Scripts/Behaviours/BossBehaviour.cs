@@ -7,6 +7,13 @@ public class BossBehaviour : MonoBehaviour
 {
     AudioManager audioManager;
     EnumManager enumManager;
+    PlayerDataManager playerDataManager;
+    SpritesManager spritesManager;
+
+    SpriteRenderer mySpriteRenderer;
+
+    [SerializeField]
+    BossShadowhHelper bossShadowHelper;
 
     [SerializeField]
     GameObject minionPrefab;
@@ -20,7 +27,8 @@ public class BossBehaviour : MonoBehaviour
     [SerializeField]
     float circleRadius;
 
-    List<EnemyMinionBehaviour> minions = new List<EnemyMinionBehaviour>();
+    [SerializeField]
+    EnemyMinionBehaviour[] minions;
 
     float maxHealt = 100.0f;
     float currentHealth;
@@ -30,33 +38,40 @@ public class BossBehaviour : MonoBehaviour
 
     EnumManager.BossActions action;
 
+    float spawnCooldown = 0.3f;
+
+    int minionsMax = 5;
+
     void Start()
     {
-        for (int i = 0; i <= 4; i++)
-        {
-            SpawnMinion();
-        }
+        SetSprite();
         currentHealth = maxHealt;
+        SpawnMinions();
         StartCoroutine(ChooseAction());
     }
-
-    void SpawnMinion()
+    void SetSprite()
     {
-        GameObject minionTemp = Instantiate(minionPrefab, transform.position, Quaternion.identity);
-        EnemyMinionBehaviour minionBehaviour = minionTemp.GetComponent<EnemyMinionBehaviour>();
-        minionBehaviour.Initialize(this, minions.Count);
-        minions.Add(minionBehaviour);
+        if (playerDataManager.GetRescuedAnimals()[0] == EnumManager.AnimalsNames.OrangeCat)
+        {
+            mySpriteRenderer.sprite = spritesManager.whiteCatNormal;
+        }
+        else
+        {
+            mySpriteRenderer.sprite = spritesManager.orangeCatNormal;
+        }
     }
 
     IEnumerator ChooseAction()
     {
         yield return new WaitForSeconds(Random.Range(nextActionCooldownMin, nextActionCooldownMax));
-        //action = enumManager.GetRandomEnumValue<EnumManager.BossActions>();
+        action = enumManager.GetRandomEnumValue<EnumManager.BossActions>();
         //action = EnumManager.BossActions.move; // for testing
-        action = EnumManager.BossActions.attack; // for testing
+        //action = EnumManager.BossActions.attack; // for testing
+        //action = EnumManager.BossActions.spawnMinions; // for testing
         CallAction();
-        Debug.Log($"current action {action}");
+        //Debug.Log($"current action {action}");
 
+        // should be after finishing current action
         StartCoroutine(ChooseAction());
     }
 
@@ -70,6 +85,9 @@ public class BossBehaviour : MonoBehaviour
             case EnumManager.BossActions.attack:
                 Attack();
                 break;
+            case EnumManager.BossActions.spawnMinions:
+                SpawnMinions();
+                break;
             default:
                 Debug.LogWarning($"action {action} not found");
                 break;
@@ -78,26 +96,52 @@ public class BossBehaviour : MonoBehaviour
 
     void Move()
     {
-        Debug.Log("move");
+        //Debug.Log("move");
         transform.position = positionPoints[Random.Range(0, positionPoints.Length)].position;
+    }
+
+    void SpawnMinions()
+    {
+        StartCoroutine(SpawnMinionsCoroutine());
+    }
+
+    IEnumerator SpawnMinionsCoroutine()
+    {
+        for (int i = 0; i < minionsMax; i++)
+        {
+            if (minions[i].GetCurrentState() == EnumManager.enemyMinionStates.dead)
+            {
+                minions[i].Initialize(this, i);
+                yield return new WaitForSeconds(spawnCooldown);
+            }
+            else
+            {
+                yield return new WaitForSeconds(0);
+            }
+        }
     }
 
     void Attack()
     {
-        Debug.Log("Attack");
-        // quitar un minion
-        minions[0].Attack();
-        minions.RemoveAt(0);
+        //Debug.Log("Attack");        
+        for (int i = 0; i < minionsMax; i++)
+        {
+            if (minions[i].GetCurrentState() == EnumManager.enemyMinionStates.orbiting)
+            {
+                minions[i].Attack();
+                break;
+            }
+        }
     }
 
     internal void TakeDamage(float _amount)
     {
-        Debug.Log($"{gameObject.name} take damage");
+        //Debug.Log($"{gameObject.name} take damage");
         audioManager.Play(EnumManager.Audio.unstitch);
         currentHealth -= _amount;
         if (currentHealth <= 0)
         {
-            Debug.Log("win");
+            //Debug.Log("win");
             EventsManager.CallOnGameOver(true);
             Destroy(gameObject);
         }
@@ -107,6 +151,16 @@ public class BossBehaviour : MonoBehaviour
     {
         Gizmos.color = gizmosColor;
         Gizmos.DrawWireSphere(transform.position, circleRadius);
+    }
+
+    void OnEnable()
+    {
+        audioManager = AudioManager.audioManager;
+        enumManager = EnumManager.enumManager;
+        playerDataManager = PlayerDataManager.playerDataManager;
+        spritesManager = SpritesManager.spritesManager;
+
+        mySpriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     #region getters & setters
@@ -120,11 +174,5 @@ public class BossBehaviour : MonoBehaviour
         return currentHealth;
     }
     #endregion
-
-    void OnEnable()
-    {
-        audioManager = AudioManager.audioManager;
-        enumManager = EnumManager.enumManager;
-    }
 
 }

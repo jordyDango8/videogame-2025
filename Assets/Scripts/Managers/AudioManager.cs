@@ -26,7 +26,7 @@ public class AudioManager : MonoBehaviour
         if (audioManager == null)
         {
             audioManager = this;
-            Debug.Log($"audiomanager = {audioManager}");
+            //Debug.Log($"audiomanager = {audioManager}");
 
             foreach (SoundInfo sound in sounds)
             {
@@ -73,6 +73,7 @@ public class AudioManager : MonoBehaviour
         AudioSource soundTemp = Search(_name).source;
         if (soundTemp)
         {
+            //Debug.Log($"duration of {_name} is {soundTemp.clip.length}");
             return soundTemp.clip.length;
         }
         return 0;

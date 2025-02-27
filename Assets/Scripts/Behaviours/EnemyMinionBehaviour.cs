@@ -10,20 +10,28 @@ public class EnemyMinionBehaviour : MonoBehaviour
     [SerializeField]
     BossBehaviour bossBehaviour;
 
+    SpriteRenderer mySpriteRenderer;
+
+    Collider2D myCollider;
+
     Transform orbitPoint;
+
     [SerializeField]
     float orbitSpeed;
+
     [SerializeField]
     float orbitRadius;
 
     [SerializeField]
     float speed;
 
-    EnumManager.enemyMinionStates currentState;
+    EnumManager.enemyMinionStates currentState = EnumManager.enemyMinionStates.dead;
 
     int myNumber;
 
     float damage = 34f;
+
+    //bool isEnabled = false;
 
     void Update()
     {
@@ -46,19 +54,36 @@ public class EnemyMinionBehaviour : MonoBehaviour
         }
         if (other.CompareTag(EnumManager.Tags.AllyMinion.ToString()))
         {
-            // avisarle al boss para que me quite de su lista
             Die();
         }
         if (other.CompareTag(EnumManager.Tags.DeadZone.ToString()))
         {
-            Die();
+            Disappear();
         }
+    }
+
+    internal void AdjustMyNumber(int _newNumber)
+    {
+        myNumber = _newNumber;
     }
 
     void Die()
     {
         audioManager.Play(EnumManager.Audio.unstitch);
-        Destroy(gameObject);
+        Disable();
+    }
+
+    void Disappear()
+    {
+        Disable();
+    }
+
+    void Disable()
+    {
+        currentState = EnumManager.enemyMinionStates.dead;
+        //isEnabled = false;
+        mySpriteRenderer.enabled = false;
+        myCollider.enabled = false;
     }
 
     void Orbit()
@@ -83,21 +108,49 @@ public class EnemyMinionBehaviour : MonoBehaviour
 
     internal void Attack()
     {
-        Debug.Log("attack");
+        //Debug.Log("attack");
         ChangeState(EnumManager.enemyMinionStates.attacking);
         transform.position = new Vector3(transform.position.x, orbitPoint.position.y, transform.position.z);
     }
 
     internal void Initialize(BossBehaviour _script, int _newNumber)
     {
-        bossBehaviour = _script;
+        Enable();
+        bossBehaviour = _script; // isn't necessary any time, fix
         orbitPoint = bossBehaviour.transform;
         ChangeState(EnumManager.enemyMinionStates.orbiting);
         myNumber = _newNumber;
     }
 
+    void Enable()
+    {
+        SetIsEnabled(true);
+        mySpriteRenderer.enabled = true;
+        myCollider.enabled = true;
+    }
+
     void OnEnable()
     {
+        //Debug.Log($"{gameObject.name} onEnable");
         audioManager = AudioManager.audioManager;
+        mySpriteRenderer = GetComponent<SpriteRenderer>();
+        myCollider = GetComponent<Collider2D>();
     }
+
+    #region getters&setters
+    /* internal bool GetIsEnabled()
+    {
+        return isEnabled;
+    } */
+
+    internal void SetIsEnabled(bool _newState)
+    {
+        //isEnabled = _newState;
+    }
+
+    internal EnumManager.enemyMinionStates GetCurrentState()
+    {
+        return currentState;
+    }
+    #endregion
 }

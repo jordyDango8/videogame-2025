@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class AnimalToBeRescuedHelper : MonoBehaviour
 {
+    AudioManager audioManager;
+
     [SerializeField]
     EnumManager.AnimalsNames myAnimalName;
 
@@ -12,6 +14,7 @@ public class AnimalToBeRescuedHelper : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
+        audioManager.Play(EnumManager.Audio.rescue);
         if (other.CompareTag(EnumManager.Tags.Player.ToString()))
         {
             switch (myAnimalName)
@@ -37,6 +40,7 @@ public class AnimalToBeRescuedHelper : MonoBehaviour
 
     void OnEnable()
     {
+        audioManager = AudioManager.audioManager;
         animator = GetComponent<Animator>();
     }
 }

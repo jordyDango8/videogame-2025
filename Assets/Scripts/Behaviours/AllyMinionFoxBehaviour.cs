@@ -19,13 +19,18 @@ public class AllyMinionFox : PlayerBehaviour
         }
         if (other.CompareTag(EnumManager.Tags.DeadZone.ToString())) // inheritance
         {
-            Die();
+            Disappear();
         }
     }
 
     void Die()
     {
         audioManager.Play(EnumManager.Audio.unstitch);
+        Destroy(gameObject);
+    }
+
+    void Disappear()
+    {
         Destroy(gameObject);
     }
 
