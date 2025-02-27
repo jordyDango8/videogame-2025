@@ -3,9 +3,9 @@ using System;
 
 public class EnumManager : MonoBehaviour
 {
-    internal static EnumManager enumManager;
+    public static EnumManager enumManager;
 
-    internal enum Tags
+    public enum Tags
     {
         Player,
         Planet,
@@ -14,47 +14,54 @@ public class EnumManager : MonoBehaviour
         Tower,
         AllyMinion,
         EnemyMinion,
+        DeadZone,
     }
 
-    internal enum Audio
+    public enum Audio
     {
         level1EndlessRunner,
         playerJump,
         starCollect,
         unstitch,
+        level1TowerDefenseOpening,
+        level1TowerDefenseLoop,
+        loseBossFight,
+        loseEndless,
+        winBossFight,
+        winEndless,
     }
 
-    internal enum floatType
+    public enum floatType
     {
         volume,
     }
 
-    internal enum Scenes
+    public enum Scenes
     {
         EndlessRunnerLevel1,
         TowerDefenseLevel1,
     }
 
-    internal enum AnimalsNames
+    public enum AnimalsNames
     {
         Fox,
         OrangeCat,
         WhiteCat,
     }
 
-    internal enum Animations
+    public enum Animations
     {
         orangeCatBeRescued,
         whiteCatBeRescued,
     }
 
-    internal enum BossActions
+    public enum BossActions
     {
         move,
         attack,
     }
 
-    internal enum enemyMinionStates
+    public enum enemyMinionStates
     {
         orbiting,
         attacking,
@@ -79,7 +86,7 @@ public class EnumManager : MonoBehaviour
         //Debug.Log("Valor aleatorio: " + randomEnumValue);
     }
 
-    internal T GetRandomEnumValue<T>() where T : Enum
+    public T GetRandomEnumValue<T>() where T : Enum
     {
         Array values = Enum.GetValues(typeof(T));
         int randomIndex = UnityEngine.Random.Range(0, values.Length);

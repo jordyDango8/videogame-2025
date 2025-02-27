@@ -6,6 +6,7 @@ public class StarBehaviour : MonoBehaviour
 {
     AudioManager audioManager;
     SpriteRenderer mySpriteRenderer;
+    PlayerDataManager playerDataManager;
 
     [SerializeField]
     ParticleSystem pickUpPS;
@@ -35,14 +36,14 @@ public class StarBehaviour : MonoBehaviour
         audioManager.Play(EnumManager.Audio.starCollect);
         mySpriteRenderer.enabled = false;
         pickUpPS.Play();
-        FindObjectOfType<PlayerData>().SetStars(FindObjectOfType<PlayerData>().GetStars() + 1);
+        playerDataManager.SetStars(playerDataManager.GetStars() + 1);
         FindObjectOfType<ProgressSliderHelper>().UpdateSlider();
     }
 
     void OnEnable()
     {
-
         mySpriteRenderer = GetComponent<SpriteRenderer>();
+        playerDataManager = PlayerDataManager.playerDataManager;
         var pickUpMain = pickUpPS.main;
         pickUpMain.loop = false;
     }

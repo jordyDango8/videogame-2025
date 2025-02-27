@@ -5,6 +5,7 @@ using UnityEngine.Scripting.APIUpdating;
 
 public class BossBehaviour : MonoBehaviour
 {
+    AudioManager audioManager;
     EnumManager enumManager;
 
     [SerializeField]
@@ -19,7 +20,7 @@ public class BossBehaviour : MonoBehaviour
     [SerializeField]
     float circleRadius;
 
-    List<MinionBehaviour> minions = new List<MinionBehaviour>();
+    List<EnemyMinionBehaviour> minions = new List<EnemyMinionBehaviour>();
 
     float maxHealt = 100.0f;
     float currentHealth;
@@ -42,7 +43,7 @@ public class BossBehaviour : MonoBehaviour
     void SpawnMinion()
     {
         GameObject minionTemp = Instantiate(minionPrefab, transform.position, Quaternion.identity);
-        MinionBehaviour minionBehaviour = minionTemp.GetComponent<MinionBehaviour>();
+        EnemyMinionBehaviour minionBehaviour = minionTemp.GetComponent<EnemyMinionBehaviour>();
         minionBehaviour.Initialize(this, minions.Count);
         minions.Add(minionBehaviour);
     }
@@ -92,10 +93,13 @@ public class BossBehaviour : MonoBehaviour
     internal void TakeDamage(float _amount)
     {
         Debug.Log($"{gameObject.name} take damage");
+        audioManager.Play(EnumManager.Audio.unstitch);
         currentHealth -= _amount;
         if (currentHealth <= 0)
         {
             Debug.Log("win");
+            EventsManager.CallOnGameOver(true);
+            Destroy(gameObject);
         }
     }
 
@@ -119,6 +123,7 @@ public class BossBehaviour : MonoBehaviour
 
     void OnEnable()
     {
+        audioManager = AudioManager.audioManager;
         enumManager = EnumManager.enumManager;
     }
 

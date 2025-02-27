@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class MinionBehaviour : MonoBehaviour
+public class EnemyMinionBehaviour : MonoBehaviour
 {
+    AudioManager audioManager;
+
     [SerializeField]
     BossBehaviour bossBehaviour;
 
-    Transform centerPoint; // El punto alrededor del cual orbitará el objeto
+    Transform orbitPoint;
     [SerializeField]
     float orbitSpeed;
     [SerializeField]
@@ -45,14 +47,24 @@ public class MinionBehaviour : MonoBehaviour
         if (other.CompareTag(EnumManager.Tags.AllyMinion.ToString()))
         {
             // avisarle al boss para que me quite de su lista
-            Destroy(gameObject);
+            Die();
         }
+        if (other.CompareTag(EnumManager.Tags.DeadZone.ToString()))
+        {
+            Die();
+        }
+    }
+
+    void Die()
+    {
+        audioManager.Play(EnumManager.Audio.unstitch);
+        Destroy(gameObject);
     }
 
     void Orbit()
     {
         //Debug.Log("orbiting");
-        if (centerPoint != null)
+        if (orbitPoint != null)
         {
             // Calcular la posición de la órbita
             float angle = (myNumber + Time.time) * orbitSpeed;
@@ -60,7 +72,7 @@ public class MinionBehaviour : MonoBehaviour
             float y = Mathf.Sin(angle) * orbitRadius;
 
             // Actualizar la posición del objeto
-            transform.position = new Vector3(centerPoint.position.x + x, centerPoint.position.y + y, transform.position.z);
+            transform.position = new Vector3(orbitPoint.position.x + x, orbitPoint.position.y + y, transform.position.z);
         }
     }
 
@@ -73,14 +85,19 @@ public class MinionBehaviour : MonoBehaviour
     {
         Debug.Log("attack");
         ChangeState(EnumManager.enemyMinionStates.attacking);
-        transform.position = new Vector3(transform.position.x, centerPoint.position.y, transform.position.z);
+        transform.position = new Vector3(transform.position.x, orbitPoint.position.y, transform.position.z);
     }
 
     internal void Initialize(BossBehaviour _script, int _newNumber)
     {
         bossBehaviour = _script;
-        centerPoint = bossBehaviour.transform;
+        orbitPoint = bossBehaviour.transform;
         ChangeState(EnumManager.enemyMinionStates.orbiting);
         myNumber = _newNumber;
+    }
+
+    void OnEnable()
+    {
+        audioManager = AudioManager.audioManager;
     }
 }

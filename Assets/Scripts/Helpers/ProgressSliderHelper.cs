@@ -5,15 +5,18 @@ using UnityEngine.UI;
 
 public class ProgressSliderHelper : MonoBehaviour
 {
+    PlayerDataManager playerDataManager;
+
     Slider mySlider;
 
     internal void UpdateSlider()
     {
-        mySlider.value = FindObjectOfType<PlayerData>().GetStars();
+        mySlider.value = playerDataManager.GetStars();
     }
 
     void OnEnable()
     {
+        playerDataManager = PlayerDataManager.playerDataManager;
         mySlider = GetComponent<Slider>();
     }
 }

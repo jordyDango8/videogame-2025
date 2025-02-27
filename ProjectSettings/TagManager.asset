@@ -10,6 +10,7 @@ TagManager:
   - Tower
   - AllyMinion
   - EnemyMinion
+  - DeadZone
   layers:
   - Default
   - TransparentFX

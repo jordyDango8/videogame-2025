@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerBehaviour : MonoBehaviour
 {
-    AudioManager audioManager;
+    protected AudioManager audioManager;
 
     [SerializeField]
     LivesController livesController;
@@ -122,11 +122,23 @@ public class PlayerBehaviour : MonoBehaviour
         EventsManager.CallOnGameOver(false);
     }
 
+    void Disable(bool _newState) // the arg isn't used, fix
+    {
+        this.enabled = false;
+    }
+
     void OnEnable()
     {
         audioManager = AudioManager.audioManager;
         myRb = GetComponent<Rigidbody2D>();
         myAnimator = GetComponent<Animator>();
+
+        EventsManager.onGameOver += Disable;
+    }
+
+    void OnDisable()
+    {
+        EventsManager.onGameOver -= Disable;
     }
 
 }

@@ -10,12 +10,23 @@ public class AllyMinionFox : PlayerBehaviour
     {
         if (other.CompareTag(EnumManager.Tags.EnemyMinion.ToString()))
         {
-            Destroy(gameObject);
+            Die();
         }
 
         if (other.CompareTag(EnumManager.Tags.Boss.ToString()))
         {
             other.GetComponent<BossBehaviour>().TakeDamage(damage);
         }
+        if (other.CompareTag(EnumManager.Tags.DeadZone.ToString())) // inheritance
+        {
+            Die();
+        }
     }
+
+    void Die()
+    {
+        audioManager.Play(EnumManager.Audio.unstitch);
+        Destroy(gameObject);
+    }
+
 }

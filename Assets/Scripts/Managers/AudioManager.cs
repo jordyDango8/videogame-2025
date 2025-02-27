@@ -26,6 +26,7 @@ public class AudioManager : MonoBehaviour
         if (audioManager == null)
         {
             audioManager = this;
+            Debug.Log($"audiomanager = {audioManager}");
 
             foreach (SoundInfo sound in sounds)
             {
@@ -48,25 +49,38 @@ public class AudioManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    internal void Play(EnumManager.Audio _nameEnum)
+    internal void Play(EnumManager.Audio _name)
     {
-        //Debug.Log($"play {_nameEnum}");
-        AudioSource soundTemp = Search(_nameEnum).source;  //marca error y se detiene, ver por qué
+        //Debug.Log($"play {_name}");
+        AudioSource soundTemp = Search(_name).source;  //marca error y se detiene, ver por qué
         if (soundTemp != null)
         {
             soundTemp.Play();
         }
     }
 
-    internal void Stop(EnumManager.Audio _nameEnum)
+    internal void Stop(EnumManager.Audio _name)
     {
-        AudioSource soundTemp = Search(_nameEnum).source;
-        StartCoroutine(FadeOut(soundTemp, 1, 0));
+        AudioSource soundTemp = Search(_name).source;
+        if (soundTemp != null)
+        {
+            StartCoroutine(FadeOut(soundTemp, 1, 0));
+        }
     }
 
-    internal SoundInfo Search(EnumManager.Audio _nameEnum)
+    internal float GetAudioDuration(EnumManager.Audio _name)
     {
-        string name = _nameEnum.ToString();
+        AudioSource soundTemp = Search(_name).source;
+        if (soundTemp)
+        {
+            return soundTemp.clip.length;
+        }
+        return 0;
+    }
+
+    internal SoundInfo Search(EnumManager.Audio _name)
+    {
+        string name = _name.ToString();
         foreach (SoundInfo sound in sounds)
         {
             if (sound.clip.name == name)
@@ -76,7 +90,7 @@ public class AudioManager : MonoBehaviour
             }
             //Debug.Log("buscando...");
         }
-        Debug.Log("sound " + name + " not found!!!");
+        Debug.LogWarning($"sound {name} not found!!!");
         return null;
     }
 

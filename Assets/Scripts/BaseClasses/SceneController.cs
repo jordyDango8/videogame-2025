@@ -11,42 +11,54 @@ public class SceneController : MonoBehaviour
 
     protected SpritesManager spritesManager;
 
-    protected PlayerData playerData;
+    protected PlayerDataManager playerDataManager;
 
     [SerializeField]
-    Image gameOverScreen;
+    protected Image gameOverScreen;
 
     [SerializeField]
-    TextMeshProUGUI gameOverTMP;
+    protected TextMeshProUGUI gameOverTMP;
 
     [SerializeField]
-    float waitToChangeScene = 3.0f;
+    protected float waitToChangeScene = 3.0f;
 
-    void Start()
+    protected EnumManager.Scenes nextSceneIfLose;
+    protected EnumManager.Scenes nextSceneIfWin;
+
+    protected EnumManager.Audio myLevelAudio;
+    protected EnumManager.Audio myWinAudio;
+    protected EnumManager.Audio myLoseAudio;
+
+    protected virtual void Start()
     {
-        audioManager.Play(EnumManager.Audio.level1EndlessRunner);
-        waitToChangeScene = 0f; // ForTesting
+        audioManager.Play(myLevelAudio);
     }
 
-    void GameOver(bool _hasWin)
-    //void GameOver()
+    protected void GameOver(bool _hasWin)
     {
+        Debug.Log($"game over {gameObject.name}");
+        audioManager.Stop(myLevelAudio);
         gameOverScreen.enabled = true;
         if (_hasWin)
         {
-            //Debug.Log("win");            
+            //Debug.Log("win");    
+            audioManager.Play(myWinAudio);
             gameOverScreen.sprite = spritesManager.winScreen;
-            ChangeScene(EnumManager.Scenes.TowerDefenseLevel1);
+            ChangeScene(nextSceneIfWin);
+            Debug.Log($"next scene {nextSceneIfWin}");
         }
         else
         {
             //Debug.Log("lose");
+            audioManager.Play(myLoseAudio);
             gameOverScreen.sprite = spritesManager.loseScreen;
-            ChangeScene(EnumManager.Scenes.EndlessRunnerLevel1);
+            ChangeScene(nextSceneIfLose);
+            Debug.Log($"next scene {nextSceneIfLose}");
         }
+
     }
 
-    void ChangeScene(EnumManager.Scenes _scene)
+    internal void ChangeScene(EnumManager.Scenes _scene)
     {
         StartCoroutine(ChangeSceneCoroutine(_scene));
     }
@@ -57,17 +69,20 @@ public class SceneController : MonoBehaviour
         SceneManager.LoadScene(_scene.ToString());
     }
 
-    void OnEnable()
+    protected void OnEnable()
     {
+        Debug.Log($"on enable {gameObject.name}");
         audioManager = AudioManager.audioManager;
+        Debug.Log($"AudioManager {audioManager} {gameObject.name}");
         spritesManager = SpritesManager.spritesManager;
-        playerData = PlayerData.playerData;
+        playerDataManager = PlayerDataManager.playerDataManager;
 
         EventsManager.onGameOver += GameOver;
     }
 
-    void OnDisable()
+    protected void OnDisable()
     {
         EventsManager.onGameOver -= GameOver;
+        audioManager.Stop(myLevelAudio);
     }
 }

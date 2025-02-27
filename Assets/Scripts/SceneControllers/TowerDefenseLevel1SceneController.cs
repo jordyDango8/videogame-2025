@@ -11,15 +11,32 @@ public class TowerDefenseLevel1SceneController : SceneController
     [SerializeField]
     SpriteRenderer boss;
 
-    void Start()
+    protected override void Start()
     {
+        myLevelAudio = EnumManager.Audio.level1TowerDefenseOpening;
+        myLoseAudio = EnumManager.Audio.loseBossFight;
+        myWinAudio = EnumManager.Audio.winBossFight;
+        nextSceneIfLose = EnumManager.Scenes.TowerDefenseLevel1;
+        nextSceneIfWin = EnumManager.Scenes.EndlessRunnerLevel1; // meanwhile main menu is created
+
+        StartCoroutine(PlayLevelMusic());
         SetTowerAndBossSprite();
+    }
+
+    IEnumerator PlayLevelMusic()
+    {
+        audioManager.Play(myLevelAudio);
+        yield return new WaitForSeconds(audioManager.GetAudioDuration(EnumManager.Audio.level1TowerDefenseOpening));
+
+        audioManager.Stop(myLevelAudio);
+        myLevelAudio = EnumManager.Audio.level1TowerDefenseOpening;
+        audioManager.Play(myLevelAudio);
     }
 
     void SetTowerAndBossSprite()
     {
-        Debug.Log($"rescued was {playerData.GetRescuedAnimals()[0]}");
-        if (playerData.GetRescuedAnimals()[0] == EnumManager.AnimalsNames.OrangeCat)
+        Debug.Log($"rescued was {playerDataManager.GetRescuedAnimals()[0]}");
+        if (playerDataManager.GetRescuedAnimals()[0] == EnumManager.AnimalsNames.OrangeCat)
         {
             //Boss.sprite = Resources.Load<Sprite>("Sprites/Boss");
             tower.sprite = SpritesManager.spritesManager.orangeCatNormal;

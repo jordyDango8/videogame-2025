@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerData : MonoBehaviour
+public class PlayerDataManager : MonoBehaviour
 {
-    internal static PlayerData playerData;
+    internal static PlayerDataManager playerDataManager;
 
     int stars;
 
@@ -12,15 +12,20 @@ public class PlayerData : MonoBehaviour
 
     void Awake()
     {
-        if (playerData == null)
+        if (playerDataManager == null)
         {
-            playerData = this;
+            playerDataManager = this;
         }
         else
         {
             Destroy(gameObject);
         }
         DontDestroyOnLoad(gameObject);
+    }
+
+    void Start()
+    {
+        SetRescuedAnimals(EnumManager.AnimalsNames.OrangeCat); //for testing
     }
 
     internal int GetStars()
