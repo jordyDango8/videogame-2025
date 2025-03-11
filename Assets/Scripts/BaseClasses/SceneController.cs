@@ -36,7 +36,7 @@ public class SceneController : MonoBehaviour
 
     protected void GameOver(bool _hasWin)
     {
-        Debug.Log($"game over {gameObject.name}");
+        //Debug.Log($"game over {gameObject.name}");
         audioManager.Stop(myLevelAudio);
         gameOverScreen.enabled = true;
         if (_hasWin)
@@ -45,7 +45,7 @@ public class SceneController : MonoBehaviour
             audioManager.Play(myWinAudio);
             gameOverScreen.sprite = spritesManager.winScreen;
             ChangeScene(nextSceneIfWin);
-            Debug.Log($"next scene {nextSceneIfWin}");
+            //Debug.Log($"next scene {nextSceneIfWin}");
         }
         else
         {
@@ -53,7 +53,7 @@ public class SceneController : MonoBehaviour
             audioManager.Play(myLoseAudio);
             gameOverScreen.sprite = spritesManager.loseScreen;
             ChangeScene(nextSceneIfLose);
-            Debug.Log($"next scene {nextSceneIfLose}");
+            //Debug.Log($"next scene {nextSceneIfLose}");
         }
 
     }
@@ -65,6 +65,12 @@ public class SceneController : MonoBehaviour
 
     IEnumerator ChangeSceneCoroutine(EnumManager.Scenes _scene)
     {
+        /*
+        if(!my audio detenido)
+        {
+            detener mi audio
+        }
+        */
         yield return new WaitForSeconds(waitToChangeScene);
         SceneManager.LoadScene(_scene.ToString());
     }
@@ -83,6 +89,5 @@ public class SceneController : MonoBehaviour
     protected void OnDisable()
     {
         EventsManager.onGameOver -= GameOver;
-        audioManager.Stop(myLevelAudio);
     }
 }

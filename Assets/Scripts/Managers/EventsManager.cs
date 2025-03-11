@@ -12,6 +12,9 @@ public class EventsManager
     internal delegate void OnAnimalRescued(EnumManager.AnimalsNames _animalName);
     internal static event OnAnimalRescued onAnimalRescued;
 
+    internal delegate void OnCameraShake(float _duration, float _strength);
+    internal static event OnCameraShake onCameraShake;
+
     //internal static event UnityAction OnGameOver;
     //public static void onGameOver() => OnGameOver?.Invoke();
 
@@ -33,11 +36,25 @@ public class EventsManager
 
     internal static void CallOnGameOver(bool _hasWin)
     {
-        onGameOver(_hasWin);
+        if(onGameOver != null)
+        {
+            onGameOver(_hasWin);
+        }
     }
 
     internal static void CallOnAnimalRescued(EnumManager.AnimalsNames _animalName)
     {
-        onAnimalRescued(_animalName);
+        if(onAnimalRescued != null)
+        {
+            onAnimalRescued(_animalName);
+        }
+    }
+
+    internal static void CallOnCameraShake(float _duration, float _strength)
+    {
+        if(onCameraShake != null)
+        {
+            onCameraShake(_duration, _strength);
+        }
     }
 }

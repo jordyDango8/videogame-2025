@@ -61,6 +61,7 @@ public class AudioManager : MonoBehaviour
 
     internal void Stop(EnumManager.Audio _name)
     {
+        //Debug.Log($"stop {_name}");
         AudioSource soundTemp = Search(_name).source;
         if (soundTemp != null)
         {

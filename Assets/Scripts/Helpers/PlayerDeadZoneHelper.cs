@@ -14,7 +14,7 @@ public class DeadZoneHelper : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("collided with: " + other.name);
+        //Debug.Log("collided with: " + other.name);
         other.SendMessage("Die");
     }
 }

@@ -102,13 +102,14 @@ public class PlayerBehaviour : MonoBehaviour
         {
             return;
         }
-        Debug.Log("take damage");
+        //Debug.Log("take damage");
         audioManager.Play(EnumManager.Audio.unstitch);
 
         myAnimator.Play("foxTakeDamage");
 
         livesController.TakeDamage();
         lives -= 1;
+        EventsManager.CallOnCameraShake(0.1f, 0.01f);
         if (lives <= 0)
         {
             lives = 0;
@@ -119,10 +120,11 @@ public class PlayerBehaviour : MonoBehaviour
     void Die()
     {
         //Debug.Log("die");
+        Disable();
         EventsManager.CallOnGameOver(false);
     }
 
-    void Disable(bool _newState) // the arg isn't used, fix
+    void Disable() // the arg isn't used, fix
     {
         this.enabled = false;
     }
@@ -133,12 +135,12 @@ public class PlayerBehaviour : MonoBehaviour
         myRb = GetComponent<Rigidbody2D>();
         myAnimator = GetComponent<Animator>();
 
-        EventsManager.onGameOver += Disable;
+        //EventsManager.onGameOver += Disable;
     }
 
     void OnDisable()
     {
-        EventsManager.onGameOver -= Disable;
+        //EventsManager.onGameOver -= Disable;
     }
 
 }

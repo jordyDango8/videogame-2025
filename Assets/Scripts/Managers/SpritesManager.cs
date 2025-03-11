@@ -37,5 +37,6 @@ public class SpritesManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        DontDestroyOnLoad(gameObject);
     }
 }
