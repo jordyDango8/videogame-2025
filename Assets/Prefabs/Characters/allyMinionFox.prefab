@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7309529039587498837}
   - component: {fileID: 9161206907744850150}
   - component: {fileID: -3557993262899093992}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: allyMinionFox
   m_TagString: AllyMinion
   m_Icon: {fileID: 0}
@@ -57,7 +57,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -211,7 +211,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6462742979216471158}
   - component: {fileID: 5759646958692228517}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: groundedRayOrigin
   m_TagString: Untagged
   m_Icon: {fileID: 0}

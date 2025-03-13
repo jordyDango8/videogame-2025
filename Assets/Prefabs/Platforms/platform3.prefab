@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3025524908141618792}
   - component: {fileID: 6585492070001901074}
   - component: {fileID: 2357690569774203533}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: platformMiddle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53,7 +53,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 1788186226786279203}
   - component: {fileID: 4329511876350900115}
   - component: {fileID: 9167831011823655928}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: platformEnd
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -179,7 +179,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -264,7 +264,7 @@ GameObject:
   - component: {fileID: 5265293493893428161}
   - component: {fileID: 7597596026218693070}
   - component: {fileID: 6359270891776504988}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: platformBegin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -306,7 +306,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -389,7 +389,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3265300457925736779}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: platform3
   m_TagString: Untagged
   m_Icon: {fileID: 0}

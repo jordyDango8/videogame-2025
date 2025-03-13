@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7309529039587498837}
   - component: {fileID: 7371610522086332661}
   - component: {fileID: 9161206907744850150}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -57,7 +57,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -78,7 +78,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: a0735528cea08c74ea9e3b79ae7c3999, type: 3}
+  m_Sprite: {fileID: 21300000, guid: edda730749e61854297fa96a8d057d5c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -179,7 +179,7 @@ MonoBehaviour:
   groundedRayOrigin: {fileID: 6462742979216471158}
   groundedRayLayerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
 --- !u!95 &9161206907744850150
 Animator:
   serializedVersion: 5
@@ -211,7 +211,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6462742979216471158}
   - component: {fileID: 5759646958692228517}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: groundedRayOrigin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
